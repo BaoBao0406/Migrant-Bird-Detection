@@ -1,6 +1,7 @@
 import numpy as np
 import time
 import cv2
+import pandas as pd
 
 
 INPUT_FILE='testing.jpg'
@@ -89,7 +90,9 @@ if len(idxs) > 0:
         bird_class.append(classIDs[i])
         cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
-print(bird_class)
+df = pd.DataFrame(bird_class, columns=['classes'])
+result = df.value_counts().reset_index()
+print(result)
 
 # show the output image
 cv2.imwrite("example.png", image)
